@@ -12,6 +12,7 @@ export default function Sample() {
 
   useEffect(() => {
     const fetchWeather = () => {
+      const proxyUrl = "https://cors-anywhere.herokuapp.com/";
       fetch(`http://api.weatherapi.com/v1/current.json?key=2ec1f9dfbc0f4e77b1953647241908&q=${cityText}&aqi=no`)
         .then(response => {
           if (!response.ok) {
@@ -46,11 +47,12 @@ export default function Sample() {
 
   const handleClick = () => {
     const cname = cityName || 'Mumbai';
+    const proxyUrl = "https://cors-anywhere.herokuapp.com/";
     let url = `http://api.weatherapi.com/v1/current.json?key=2ec1f9dfbc0f4e77b1953647241908&q=${cityText}&aqi=no`;
     fetch(url)
       .then(response => {
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error('Network response was not ok'+response.statusText);
         }
         return response.json();
       })
